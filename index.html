@@ -136,9 +136,7 @@ btn.addEventListener('click', () => {
   music.play();
   startConfetti();
   setInterval(createBalloon, 500);
-  const today = new Date();
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('todayDate').textContent = `Date: ${today.toLocaleDateString('en-US', options)}`;
+  document.getElementById('todayDate').textContent = "Date: November 12, 2025";
 
   // enable screen tap event
   document.body.addEventListener('click', (e) => showFloatingText(e.clientX, e.clientY));
