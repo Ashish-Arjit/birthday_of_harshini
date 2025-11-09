@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎉 Harshini’s Birthday Bash 🎂</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff8c00, #ff3cac, #784ba0);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+    color: white;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  #startBtn {
+    font-size: 2em;
+    padding: 20px 50px;
+    margin-top: 30vh;
+    background: linear-gradient(90deg, #00c9ff, #92fe9d);
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+
+  #startBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #fff;
+  }
+
+  .hidden { display: none; }
+
+  h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    margin-top: 40px;
+    text-shadow: 0 0 20px #fff, 0 0 40px #ff0;
+    animation: bounceIn 1.2s ease;
+  }
+
+  @keyframes bounceIn {
+    0% {transform: scale(0.3); opacity: 0;}
+    50% {transform: scale(1.1); opacity: 1;}
+    100% {transform: scale(1);}
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-top: 10px;
+    color: #ffe;
+    text-shadow: 0 0 15px #00ffff;
+  }
+
+  p {
+    font-size: 1.3em;
+    color: #fffde7;
+    margin: 15px;
+  }
+
+  .highlight {
+    color: #ffeb3b;
+    text-shadow: 0 0 15px #ff4081;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    font-size: 1.2em;
+    color: #fff;
+    text-shadow: 0 0 15px #fff;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 60px;
+    height: 80px;
+    border-radius: 50% 50% 45% 45%;
+    animation: float 6s ease-in infinite;
+  }
+
+  @keyframes float {
+    0% {transform: translateY(0) scale(1);}
+    100% {transform: translateY(-800px) scale(1.1);}
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    animation: fadeIn 1.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .cake {
+    margin: 30px auto;
+    width: 160px;
+    height: 160px;
+    position: relative;
+  }
+
+  .layer {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ffb6c1, #ff69b4);
+    bottom: 0;
+    box-shadow: 0 0 20px #ff66cc;
+  }
+
+  .layer:nth-child(2) {
+    width: 130px;
+    left: 15px;
+    bottom: 40px;
+    background: linear-gradient(to right, #fff0f5, #ffb6c1);
+  }
+
+  .candle {
+    width: 10px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    top: -40px;
+    left: 75px;
+    border-radius: 5px;
+  }
+
+  .flame {
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(circle, #ff0, #ff6600);
+    position: absolute;
+    top: -20px;
+    left: -1px;
+    border-radius: 50%;
+    animation: flicker 0.3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    from {transform: scale(1);}
+    to {transform: scale(1.2);}
+  }
+
+  .message {
+    margin-top: 15px;
+    font-size: 1.4em;
+    color: #fff;
+    animation: pop 1s ease-in-out forwards;
+  }
+
+  @keyframes pop {
+    0% {transform: scale(0);}
+    60% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+  }
+
+</style>
+</head>
+<body>
+
+<button id="startBtn">🎉 TAP FOR A SURPRISE 🎉</button>
+
+<div id="party" class="hidden">
+  <canvas id="confetti"></canvas>
+  <audio id="music" loop>
+    <source src="https://www.myinstants.com/media/sounds/happy-birthday-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="content">
+    <h1>🎂 Yo Harshini!! 🎉</h1>
+    <h2>You know what day it is?!</h2>
+    <div class="cake">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="layer"></div>
+      <div class="layer"></div>
+    </div>
+    <p class="message">It’s your <span class="highlight">BIRTHDAY</span> — time to celebrate like the legends we are! 🥳</p>
+    <p>Thanks for being the most fun, loyal, chaos-loving friend ever.<br>
+    Here’s to more inside jokes, random adventures, and memories that never fade! 🚀</p>
+    <p class="highlight">From your forever teammate in madness — Ashish 😎</p>
+    <p id="todayDate"></p>
+  </div>
+  <div class="footer">Best wishes, always — Your Buddy Ashish 💫</div>
+</div>
+
+<script>
+const btn = document.getElementById('startBtn');
+const party = document.getElementById('party');
+const music = document.getElementById('music');
+
+btn.addEventListener('click', () => {
+  btn.classList.add('hidden');
+  party.classList.remove('hidden');
+  music.play();
+  startConfetti();
+  setInterval(createBalloon, 500);
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('todayDate').textContent = `Date: ${today.toLocaleDateString('en-US', options)}`;
+});
+
+function startConfetti() {
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let confetti = [];
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function randomColor() {
+    const colors = ['#ff007f', '#ffd166', '#06d6a0', '#118ab2', '#ef476f'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function createConfetti() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height - canvas.height;
+    const size = Math.random() * 6 + 2;
+    const color = randomColor();
+    const speed = Math.random() * 3 + 2;
+    confetti.push({x, y, size, color, speed});
+  }
+
+  function drawConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confetti.forEach((c, i) => {
+      ctx.fillStyle = c.color;
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+      ctx.fill();
+      c.y += c.speed;
+      if (c.y > canvas.height) confetti.splice(i, 1);
+    });
+  }
+
+  function update() {
+    if (confetti.length < 300) createConfetti();
+    drawConfetti();
+    requestAnimationFrame(update);
+  }
+  update();
+}
+
+function createBalloon() {
+  const balloon = document.createElement('div');
+  balloon.classList.add('balloon');
+  const colors = ['#ff4b5c', '#ffcc29', '#00bbf9', '#7b2cbf', '#80ff72'];
+  balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+  balloon.style.left = Math.random() * 100 + 'vw';
+  balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
+  document.body.appendChild(balloon);
+  setTimeout(() => balloon.remove(), 8000);
+}
+</script>
+</body>
+</html>
