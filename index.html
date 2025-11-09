@@ -6,7 +6,6 @@
 <title>🎉 Harshini’s Birthday Bash 🎂</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap');
-
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -17,13 +16,11 @@
     overflow: hidden;
     text-align: center;
   }
-
   @keyframes gradientShift {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
   }
-
   #startBtn {
     font-size: 2em;
     padding: 20px 50px;
@@ -37,14 +34,11 @@
     transition: all 0.3s ease;
     font-weight: bold;
   }
-
   #startBtn:hover {
     transform: scale(1.1);
     box-shadow: 0 0 30px #fff;
   }
-
   .hidden { display: none; }
-
   h1 {
     font-family: 'Fredoka One', cursive;
     font-size: 3em;
@@ -52,88 +46,53 @@
     text-shadow: 0 0 20px #fff, 0 0 40px #ff0;
     animation: bounceIn 1.2s ease;
   }
-
   @keyframes bounceIn {
     0% {transform: scale(0.3); opacity: 0;}
     50% {transform: scale(1.1); opacity: 1;}
     100% {transform: scale(1);}
   }
-
-  h2 {
-    font-size: 2em;
-    margin-top: 10px;
-    color: #ffe;
-    text-shadow: 0 0 15px #00ffff;
-  }
-
-  p {
-    font-size: 1.3em;
-    color: #fffde7;
-    margin: 15px;
-  }
-
-  .highlight {
-    color: #ffeb3b;
-    text-shadow: 0 0 15px #ff4081;
-  }
-
+  h2 { font-size: 2em; color: #ffe; text-shadow: 0 0 15px #00ffff; }
+  p { font-size: 1.3em; color: #fffde7; margin: 15px; }
+  .highlight { color: #ffeb3b; text-shadow: 0 0 15px #ff4081; }
   .footer {
-    position: absolute;
-    bottom: 25px;
-    width: 100%;
-    font-size: 1.2em;
-    color: #fff;
-    text-shadow: 0 0 15px #fff;
+    position: absolute; bottom: 25px; width: 100%;
+    font-size: 1.2em; color: #fff; text-shadow: 0 0 15px #fff;
   }
-
   .balloon {
-    position: absolute;
-    bottom: -150px;
-    width: 60px;
-    height: 80px;
+    position: absolute; bottom: -150px;
+    width: 60px; height: 80px;
     border-radius: 50% 50% 45% 45%;
     animation: float 6s ease-in infinite;
   }
-
   @keyframes float {
     0% {transform: translateY(0) scale(1);}
     100% {transform: translateY(-800px) scale(1.1);}
   }
-
   canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
   }
-
-  .content {
-    position: relative;
-    z-index: 10;
-    animation: fadeIn 1.5s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-
-  .message {
-    margin-top: 25px;
-    font-size: 1.5em;
-    color: #fff;
-    animation: pop 1s ease-in-out forwards;
-  }
-
+  .content { position: relative; z-index: 10; animation: fadeIn 1.5s ease forwards; }
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  .message { margin-top: 25px; font-size: 1.5em; color: #fff; animation: pop 1s ease-in-out forwards; }
   @keyframes pop {
     0% {transform: scale(0);}
     60% {transform: scale(1.2);}
     100% {transform: scale(1);}
   }
-
+  /* floating text */
+  .float-text {
+    position: absolute;
+    font-size: 1.5em;
+    font-weight: bold;
+    pointer-events: none;
+    animation: floatUp 1.5s ease-out forwards;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-60px); opacity: 0; }
+  }
 </style>
 </head>
 <body>
@@ -180,7 +139,33 @@ btn.addEventListener('click', () => {
   const today = new Date();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('todayDate').textContent = `Date: ${today.toLocaleDateString('en-US', options)}`;
+
+  // enable screen tap event
+  document.body.addEventListener('click', (e) => showFloatingText(e.clientX, e.clientY));
 });
+
+function showFloatingText(x, y) {
+  const messages = [
+    "🎉 Happy Birthday Harshini!",
+    "🎈 You’re awesome!",
+    "💫 Keep shining!",
+    "🥳 Party time!",
+    "🌟 Best day ever!"
+  ];
+  const msg = document.createElement('div');
+  msg.classList.add('float-text');
+  msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+  msg.style.left = x + 'px';
+  msg.style.top = y + 'px';
+  msg.style.color = randomColor();
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1500);
+}
+
+function randomColor() {
+  const colors = ['#ff007f', '#ffd166', '#06d6a0', '#118ab2', '#ef476f'];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
 
 function startConfetti() {
   const canvas = document.getElementById('confetti');
@@ -192,11 +177,6 @@ function startConfetti() {
   }
   window.addEventListener('resize', resize);
   resize();
-
-  function randomColor() {
-    const colors = ['#ff007f', '#ffd166', '#06d6a0', '#118ab2', '#ef476f'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
 
   function createConfetti() {
     const x = Math.random() * canvas.width;
