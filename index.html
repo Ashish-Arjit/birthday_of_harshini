@@ -140,8 +140,9 @@
   <div class="footer"><strong>Best Wishes — Always your buddy, Ashish 💥<strong></div>
 
   <audio id="song" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2023/03/24/audio_1f85f349da.mp3?filename=crazy-birthday-14056.mp3" type="audio/mpeg">
+    <source src="https://files.catbox.moe/1xk1a5.mp3" type="audio/mpeg">
   </audio>
+
 
   <script>
     const btn = document.getElementById("surpriseBtn");
@@ -193,7 +194,7 @@
     btn.addEventListener("click", () => {
       btn.style.display = "none";
       content.classList.add("show");
-      song.play();
+      song.play().catch(err => console.log("Audio play blocked:", err));
       update();
     });
 
